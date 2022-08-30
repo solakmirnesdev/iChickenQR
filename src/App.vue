@@ -64,9 +64,13 @@
         <div class="py-6 bg-white sm:py-8 lg:py-12">
           <div class="px-4 mx-auto max-w-screen-2xl md:px-8">
             <div class="body">
-              <StepOne v-if="activeTab === 'StepOne'" />
+              <StepOne
+                v-if="activeTab === 'StepOne'"
+                @sendCred="sendCred"
+              />
               <StepTwo
                 v-if="activeTab === 'StepTwo'"
+                @starRating="starRating"
               />
             </div>
             <div>
@@ -93,6 +97,8 @@ import { ref } from 'vue'
 
 const activeTab = ref('StepOne')
 const isActive = ref(true)
+const stars = ref(0)
+const cred = ref('')
 
 const nextStep = () => {
   if (activeTab.value === 'StepOne') {
@@ -101,7 +107,8 @@ const nextStep = () => {
     console.log(activeTab.value)
   }
   else if (activeTab.value === 'StepTwo') {
-    alert('Go to last step')
+    console.log('Stars value' + stars.value)
+    console.log('Data' + cred.value)
   }
 }
 
@@ -110,6 +117,14 @@ const prevStep = () => {
     activeTab.value = 'StepOne'
     isActive.value = true
   }
+}
+
+const starRating = (index) => {
+  stars.value = index
+}
+
+const sendCred = (sendData) => {
+  cred.value = sendData
 }
 
 </script>

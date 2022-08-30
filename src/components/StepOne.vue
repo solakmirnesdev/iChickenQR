@@ -9,6 +9,7 @@
       </label>
       <input
         name="name"
+        v-model="name"
         class="
           w-full
           px-3
@@ -29,6 +30,7 @@
         Ostavite vase misljenje:
       </label>
       <textarea
+        v-model="desc"
         rows="4"
         class="
           w-full
@@ -39,9 +41,27 @@
           bg-gray-50
           focus:ring
           ring-indigo-300"
-      >
-
-      </textarea>
+      ></textarea>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, computed } from 'vue'
+
+const emit = defineEmits([
+    'sendCred'
+])
+
+const name = ref('')
+const desc = ref('')
+
+const sendData = computed(() => {
+  return `${name.value} ${desc.value}`
+})
+
+const sendCred = () => {
+  emit('sendCred', sendData)
+}
+</script>
+
