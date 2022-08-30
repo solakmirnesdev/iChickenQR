@@ -8,8 +8,7 @@
         Unesite vase ime (Opcionalno):
       </label>
       <input
-        name="name"
-        v-model="name"
+        @input="$emit('sendName', $event.target.value)"
         class="
           w-full
           px-3
@@ -24,13 +23,12 @@
         "
       />
       <label
-          for="name"
           class="inline-flex mb-2 text-sm text-gray-800 mt-5"
       >
         Ostavite vase misljenje:
       </label>
       <textarea
-        v-model="desc"
+        @input="$emit('sendDesc', $event.target.value)"
         rows="4"
         class="
           w-full
@@ -47,21 +45,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+
+import {ref, computed} from 'vue'
 
 const emit = defineEmits([
-    'sendCred'
+  'sendName',
+  'sendDesc'
 ])
 
-const name = ref('')
-const desc = ref('')
-
-const sendData = computed(() => {
-  return `${name.value} ${desc.value}`
-})
-
-const sendCred = () => {
-  emit('sendCred', sendData)
-}
 </script>
 
